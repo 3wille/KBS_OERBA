@@ -47,12 +47,26 @@
     \begin{frame}
         \frametitle{Rechte}
         \begin{itemize}
-            \item user and group
-            \item read / write / execute
+            \item user, group, other
+            \item read, write, execute
         \end{itemize}
-        \begin{block}{Beispiel}
+        \begin{block}{Beispiel (symbolische Notation)}
             drwxr-xr-x\quad 3\ kbs\qquad kbs\qquad 4.0K Oct 17 17:38 kbs/
         \end{block}
+        \begin{itemize}
+          \item können auch in oktaler Notation angegeben werden
+          \begin{itemize}
+            \item Rechten wird numerischer Wert zugeordnet:\\
+            \begin{tabular}{ll}
+              read & 4\\
+              write & 2\\
+              execute & 1
+            \end{tabular}
+            \item Kombinationen werden addiert und sind eindeutig
+            \item Beispiel oben: \texttt{755}
+            \item kann man mit \texttt{\$ stat} herausfinden
+          \end{itemize}
+        \end{itemize}
     \end{frame}
 
     \begin{frame}
