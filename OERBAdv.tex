@@ -5,6 +5,10 @@
 \usetheme{Boadilla}
 \usepackage{ngerman}
 \usepackage{algorithmicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{sansmathaccent}
+\pdfmapfile{+sansmathaccent.map}
 %\usepackage{listings}
 %\usepackage{minted}
 \beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
@@ -16,7 +20,7 @@
 
     \begin{frame}
         \titlepage
-        {\tiny nach Folien von Dennis 6Keiztzel}
+        {\tiny nach Folien von Dennis 6keitzel}
     \end{frame}
 
     \begin{frame}
@@ -43,12 +47,26 @@
     \begin{frame}
         \frametitle{Rechte}
         \begin{itemize}
-            \item user and group
-            \item read / write / execute
+            \item user, group, other
+            \item read, write, execute
         \end{itemize}
-        \begin{block}{Beispiel}
-            drwxr-xr-x\ \ 3\ kbs\ \ \ \ kbs\ \ \ \ 4.0K Oct 17 17:38 kbs/
+        \begin{block}{Beispiel (symbolische Notation)}
+            drwxr-xr-x\quad 3\ kbs\qquad kbs\qquad 4.0K Oct 17 17:38 kbs/
         \end{block}
+        \begin{itemize}
+          \item können auch in oktaler Notation angegeben werden
+          \begin{itemize}
+            \item Rechten wird numerischer Wert zugeordnet:\\
+            \begin{tabular}{ll}
+              read & 4\\
+              write & 2\\
+              execute & 1
+            \end{tabular}
+            \item Kombinationen werden addiert und sind eindeutig
+            \item Beispiel oben: \texttt{755}
+            \item kann man mit \texttt{\$ stat} herausfinden
+          \end{itemize}
+        \end{itemize}
     \end{frame}
 
     \begin{frame}
@@ -69,7 +87,7 @@
         \frametitle{Navigation}
         \begin{block}{Completion}
             \begin{Huge}
-                TAB
+                $\rightleftarrows$TAB
             \end{Huge}
         \end{block}
         \begin{block}{aktueller Pfad}
@@ -85,11 +103,11 @@
 
     \begin{frame}
         \frametitle{Dateien/Ordner}
-        \begin{block}{Ordner erstellen/l\"oschen}
+        \begin{block}{Ordner erstellen/löschen}
             \$ mkdir [name] \\
             \$ rmdir [name]
         \end{block}
-        \begin{block}{Datei erstellen/l\"oschen}
+        \begin{block}{Datei erstellen/löschen}
             \$ touch [name] \\
             \$ rm [name]
         \end{block}
@@ -121,7 +139,7 @@
         \begin{itemize}
             \item VPN
             \item SSH
-            \item bestimmte RJ45 Dosen?
+            \item blaue RJ45-Dosen (z.B. Foyer Haus D) + VPN
         \end{itemize}
     \end{frame}
 
@@ -129,14 +147,14 @@
     \begin{frame}
         \frametitle{Was?}
         \begin{itemize}
-            \item System \glqq sieht{\grqq} anderes Netz
+            \item System ,,sieht'' anderes Netz ($\rightarrow$ andere IP-Adresse)
             \item Zugriff auf nicht öffentliche Dienste
         \end{itemize}
     \end{frame}
     \begin{frame}
         \frametitle{Warum?}
         \begin{itemize}
-            \item Drucken(vorallem Windows)
+            \item Drucken (vor allem Windows)
             \item interne Seiten
         \end{itemize}
     \end{frame}
@@ -150,9 +168,10 @@
     \begin{frame}
         \frametitle{Bemerkungen}
         \begin{itemize}
-            \item Internet Zugang kann langsamer werden
+            \item Internet-Zugang kann langsamer werden
             \item kann überlasten
             \item bestimmte Ports blockiert
+            \item Verbindung bricht manchmal einfach ab
         \end{itemize}
     \end{frame}
     \subsection{SSH}
@@ -160,7 +179,7 @@
         \frametitle{Was?}
         \begin{itemize}
             \item \textbf{S}ecure \textbf{Sh}ell
-            \item (Fern)zugriff auf unix-like Systems
+            \item (Fern)zugriff auf unix-ähnliche Systeme
             \item Installation
             \begin{itemize}
             \item Unix: done
@@ -171,11 +190,11 @@
     \begin{frame}
         \frametitle{Wie?}
         \begin{itemize}
-            \item Host: rzssh1.informatik.uni-hamburg.de
+            \item Host: \texttt{rzssh1.informatik.uni-hamburg.de}
             %\item Fingerprint: ECDSA: SHA256:mMfqLOIIj4spGkmKC3gvYpXqRI3/K8waCYGBqXGfZGk
-            \item User\&Password: IRZ-Kennung(5musterm)
-            \begin{block}{ECDSA Fingerprint}
-                SHA256:mMfqLOIIj4spGkmKC3gvYpXqRI3/K8waCYGBqXGfZGk
+            \item User \& Password: IRZ-Kennung (5musterm)
+            \begin{block}{ECDSA-Fingerprint}
+                \texttt{SHA256:mMfqLOIIj4spGkmKC3gvYpXqRI3/K8waCYGBqXGfZGk}
             \end{block}
         \end{itemize}
     \end{frame}
@@ -191,7 +210,7 @@
         \end{block}
         \pause
         \begin{block}{Passwort}
-            Created directory \'/home/kbs/.ssh\'. \\
+            Created directory /home/kbs/.ssh. \\
             Enter passphrase (empty for no passphrase):\\
             Enter same passphrase again: \\
         \end{block}
@@ -242,10 +261,10 @@
         \frametitle{Userconfig}
         \begin{block}{$\tilde \ $/.ssh/config}
             Host fbi\\
-            \    \    Hostname rzssh1.informatik.uni-hamburg.de\\
-            \    \   User 1wiedema\\
-            \    \    ForwardX11 yes\\
-            \    \    DynamicForward 7777\\
+            \qquad Hostname rzssh1.informatik.uni-hamburg.de\\
+            \qquad User 5musterm\\
+            \qquad \# ForwardX11 yes\\
+            \qquad DynamicForward 7777\\
         \end{block}
     \end{frame}
 \section{Git}
